@@ -35,7 +35,7 @@ public static void main(String[] args) throws IOException {
       System.out.write(byte2);
       // System.out.print((char)byte2);
     }
-
+    System.out.flush();
 
     //System.out.println("We should be done!");
 
