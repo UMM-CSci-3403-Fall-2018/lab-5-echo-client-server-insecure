@@ -12,6 +12,8 @@ public class EchoServer {
    try {
      // Start listening on the specified port
      ServerSocket sock = new ServerSocket(portNumber);
+
+     // Initalize byte variable
      int serverByte;
      // Run forever, which is common for server style services
      while (true) {
@@ -19,17 +21,18 @@ public class EchoServer {
        Socket client = sock.accept();
        System.out.println("Got a request!");
 
-       // Construct a writer so we can write to the socket, thereby
-       // sending something back to the client.
+       // Construct a input from the client
+       // and an output to the client
        InputStream input = client.getInputStream();
        OutputStream output = client.getOutputStream();
 
-
+       // Takes the input from the client and returns it to the client
        while ((serverByte = input.read()) != -1) {
          output.write(serverByte);
          output.flush();
        }
 
+       // just in case
        output.flush();
 
        // Close the client socket since we're done.

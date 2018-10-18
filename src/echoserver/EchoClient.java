@@ -18,26 +18,29 @@ public static void main(String[] args) throws IOException {
   try {
     // Connect to the server
     Socket socket = new Socket(server, portNumber);
-    //System.out.println("Connected to socket");
 
-    // Get the input stream so we can read from that socket
+
+    // Get the output stream so we can read from standard input and sent it to the socket
+    // Get the input stream so we can print data from socket
     OutputStream output = socket.getOutputStream();
     InputStream input = socket.getInputStream();
-    //System.out.println("Initalize output stream");
 
+    // Write data from standard input to the server
     // Print all the input we receive from the server
-    int byte1;
-    int byte2;
-    while ((byte1 = System.in.read()) != -1) {
-      output.write(byte1);
+    int keyboardByte;
+    int outputByte;
+    while ((keyboardByte = System.in.read()) != -1) {
+      output.write(keyboardByte);
       output.flush();
-      byte2 = input.read();
-      System.out.write(byte2);
-      // System.out.print((char)byte2);
+      outputByte = input.read();
+      System.out.write(outputByte);
+
     }
+
+    // Flushes out last bytes
     System.out.flush();
 
-    //System.out.println("We should be done!");
+
 
     // Close the socket when we're done reading from it
     socket.close();
